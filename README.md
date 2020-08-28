@@ -29,4 +29,4 @@ EXIT_SUCCESS otherwise.
 ##### Example
 Let's suppose the execution time of a test.exe program, situated in the same folder as ctime.exe, should be measured, providing 1 as argument.
 The command line should like:
-###### ctime .\\time.exe 1
+###### ctime .\\\time.exe 1
