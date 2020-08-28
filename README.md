@@ -20,6 +20,7 @@ EXIT_FAILURE if:
 -a target is not provided;
 -the length of the arguments exceeds the limit defined by the MAXLINE macro;
 -the creation of the target process fails.
+
 EXIT_SUCCESS otherwise.
 
 ##### Example
