@@ -33,6 +33,7 @@ int wmain(int argc, wchar_t* argv[]) {
     //Target check
     if (argc == 1) {
         printf("Usage: ctime <arguments>");
+        fflush(stdout);
         exit(EXIT_FAILURE);
     }
     wchar_t* command_line = (wchar_t*)malloc(MAXLINE * sizeof(wchar_t));
@@ -45,6 +46,7 @@ int wmain(int argc, wchar_t* argv[]) {
         //Length check
         if (command_len + extra_size > MAXLINE) {
             printf("Exceeded max input size");
+            fflush(stdout);
             exit(EXIT_FAILURE);
         }
         for (size_t j = 0; j < extra_size; j++) {
@@ -57,6 +59,7 @@ int wmain(int argc, wchar_t* argv[]) {
     command_line[command_len] = (TCHAR)'\0';
     wprintf(command_line);
     printf("\n");
+    fflush(stdout);
 
     //Further declarations required to create the target process
     STARTUPINFOW si;
@@ -73,11 +76,13 @@ int wmain(int argc, wchar_t* argv[]) {
     //Process creation, check and wait for termination
     if (CreateProcessW(argv[1], command_line, NULL, NULL, false, NORMAL_PRIORITY_CLASS, NULL, NULL, &si, &pi) == 0) {
         printf("Process creation failure");
+        fflush(stdout);
         exit(EXIT_FAILURE);
     }
     WaitForSingleObject(pi.hProcess, INFINITE);
     end = clock();
     printf("\n");
+    fflush(stdout);
 
     //Target execution check
     GetExitCodeProcess(pi.hProcess, &exit_code);
@@ -87,12 +92,14 @@ int wmain(int argc, wchar_t* argv[]) {
     else {
         printf("Process reported success\n");
     }
+    fflush(stdout);
     CloseHandle(pi.hProcess);
     CloseHandle(pi.hThread);
 
     //Result printing
     double result = ((double)end - (double)delta) / (double)CLOCKS_PER_SEC;
     printf("Execution time: %f seconds", result);
+    fflush(stdout);
     free(command_line);
     exit(EXIT_SUCCESS);
 }
@@ -104,6 +111,7 @@ int main(int argc, char* argv[]){
     //Target check
     if(argc == 1){
         printf("Usage: ctime <arguments>");
+        fflush(stdout);
         exit(EXIT_FAILURE);
     }
     TCHAR* command_line = (TCHAR*)malloc(MAXLINE * sizeof(TCHAR));
@@ -116,6 +124,7 @@ int main(int argc, char* argv[]){
         //Length check
         if (command_len + extra_size > MAXLINE) {
             printf("Exceeded max input size");
+            fflush(stdout);
             exit(EXIT_FAILURE);
         }
         for (size_t j = 0; j < extra_size; j++) {
@@ -127,6 +136,7 @@ int main(int argc, char* argv[]){
     }
     command_line[command_len] = (TCHAR)'\0';
     printf("%s\n", command_line);
+    fflush(stdout);
 
     //Further declarations required to create the target process
     STARTUPINFO si;
@@ -143,11 +153,13 @@ int main(int argc, char* argv[]){
     //Process creation, check and wait for termination
     if (CreateProcessA(argv[1], command_line, NULL, NULL, false, NORMAL_PRIORITY_CLASS, NULL, NULL, &si, &pi) == 0) {
         printf("Process creation failure");
+        fflush(stdout);
         exit(EXIT_FAILURE);
     }
     WaitForSingleObject(pi.hProcess, INFINITE);
     end = clock();
     printf("\n");
+    fflush(stdout);
 
     //Target execution check
     GetExitCodeProcess(pi.hProcess, &exit_code);
@@ -157,12 +169,14 @@ int main(int argc, char* argv[]){
     else {
         printf("Process reported success\n");
     }
+    fflush(stdout);
     CloseHandle(pi.hProcess);
     CloseHandle(pi.hThread);
 
     //Result printing
     double result = ((double)end - (double)delta)/(double)CLOCKS_PER_SEC;
     printf("Execution time: %f seconds", result);
+    fflush(stdout);
     free(command_line);
     exit(EXIT_SUCCESS);
 }
