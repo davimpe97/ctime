@@ -56,10 +56,7 @@ int wmain(int argc, wchar_t* argv[]) {
         memset(command_line + command_len, L' ', 1);
         command_len++;
     }
-    command_line[command_len] = (TCHAR)'\0';
-    wprintf(command_line);
-    printf("\n");
-    fflush(stdout);
+    command_line[command_len] = (wchar_t)'\0';
 
     //Further declarations required to create the target process
     STARTUPINFOW si;
@@ -135,8 +132,6 @@ int main(int argc, char* argv[]){
         command_len++;
     }
     command_line[command_len] = (TCHAR)'\0';
-    printf("%s\n", command_line);
-    fflush(stdout);
 
     //Further declarations required to create the target process
     STARTUPINFO si;
