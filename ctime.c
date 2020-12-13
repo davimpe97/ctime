@@ -47,6 +47,7 @@ int wmain(int argc, wchar_t* argv[]) {
         if (command_len + extra_size > MAXLINE) {
             printf("Exceeded max input size");
             fflush(stdout);
+            free(command_line);
             exit(EXIT_FAILURE);
         }
         for (size_t j = 0; j < extra_size; j++) {
@@ -74,6 +75,7 @@ int wmain(int argc, wchar_t* argv[]) {
     if (CreateProcessW(argv[1], command_line, NULL, NULL, false, NORMAL_PRIORITY_CLASS, NULL, NULL, &si, &pi) == 0) {
         printf("Process creation failure");
         fflush(stdout);
+        free(command_line);
         exit(EXIT_FAILURE);
     }
     WaitForSingleObject(pi.hProcess, INFINITE);
@@ -122,6 +124,7 @@ int main(int argc, char* argv[]){
         if (command_len + extra_size > MAXLINE) {
             printf("Exceeded max input size");
             fflush(stdout);
+            free(command_line);
             exit(EXIT_FAILURE);
         }
         for (size_t j = 0; j < extra_size; j++) {
@@ -149,6 +152,7 @@ int main(int argc, char* argv[]){
     if (CreateProcessA(argv[1], command_line, NULL, NULL, false, NORMAL_PRIORITY_CLASS, NULL, NULL, &si, &pi) == 0) {
         printf("Process creation failure");
         fflush(stdout);
+        free(command_line);
         exit(EXIT_FAILURE);
     }
     WaitForSingleObject(pi.hProcess, INFINITE);
